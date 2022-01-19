@@ -68,6 +68,7 @@ BEGIN CentralBodyTerrain
 
         BEGIN StreamingTerrain
             UseCurrentStreamingTerrainServer     Yes
+            CurrentStreamingTerrainServerName    http://twsusecovacc01.agi.com/stk-terrain
             StreamingTerrainTilesetName    world
             StreamingTerrainServerName           assets.agi.com/stk-terrain/
             StreamingTerrainAzimuthElevationMaskEnabled       No
@@ -1878,41 +1879,11 @@ END Extensions
 
 BEGIN SubObjects
 
-Class Constellation
-
-	MyConst
-
-END Class
-
-Class Facility
-
-	MyFacility
-
-END Class
-
-Class Satellite
-
-	Walk
-
-END Class
-
 END SubObjects
 
 BEGIN References
     Instance *
         *
-    END Instance
-    Instance Constellation/MyConst
-    END Instance
-    Instance Facility/MyFacility
-        Facility/MyFacility
-    END Instance
-    Instance Satellite/Walk
-        Satellite/Walk
-        Satellite/Walk/Sensor/MySensor
-    END Instance
-    Instance Satellite/Walk/Sensor/MySensor
-        Satellite/Walk/Sensor/MySensor
     END Instance
 END References
 
