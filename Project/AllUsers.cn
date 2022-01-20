@@ -1,0 +1,179 @@
+stk.v.11.0
+WrittenBy    STK_v11.2.0
+
+BEGIN Constellation
+
+Name  AllUsers
+BEGIN Definition
+
+   Type        Constellation
+   Operator    Or
+   Order       1
+   ToParentConstraint    AnyParent
+   FromParentConstraint  AnyParent
+    Object  Satellite/AAUSAT_4_41460
+    Object  Satellite/BIRD_2_26959
+    Object  Satellite/CHUANGXIN_1-03_37930
+    Object  Satellite/CHUANGXIN_1-04_40137
+    Object  Satellite/DEIMOS-1_35681
+    Object  Satellite/DLR-TUBSAT_25757
+    Object  Satellite/GHGSAT-D_41602
+    Object  Satellite/INS-1A_41949
+    Object  Satellite/INS-1B_41954
+    Object  Satellite/LAPAN-TUBSAT_29709
+    Object  Satellite/LQSAT_40958
+    Object  Satellite/M3MSAT_41605
+    Object  Satellite/NIGERIASAT-X_37790
+    Object  Satellite/PATHFINDER_1_41787
+    Object  Satellite/QSAT-EOS_40301
+    Object  Satellite/RISING_2_39769
+    Object  Satellite/SAUDISAT_2_28371
+    Object  Satellite/SPARK_1_41900
+    Object  Satellite/SPARK_2_41901
+    Object  Satellite/TIANTUO_2_40144
+    Object  Satellite/TIGRISAT_40043
+    Object  Satellite/tle-42792_42792
+    Object  Satellite/tle-42793_42793
+    Object  Satellite/tle-42826_42826
+    Object  Satellite/tle-42828_42828
+    Object  Satellite/tle-42835_42835
+    Object  Satellite/tle-42846_42846
+    Object  Satellite/tle-42847_42847
+    Object  Satellite/tle-42848_42848
+    Object  Satellite/tle-42849_42849
+    Object  Satellite/tle-43011_43011
+    Object  Satellite/tle-43118_43118
+    Object  Satellite/tle-43131_43131
+    Object  Satellite/tle-43143_43143
+    Object  Satellite/tle-43197_43197
+    Object  Satellite/tle-43439_43439
+    Object  Satellite/tle-43440_43440
+    Object  Satellite/tle-43441_43441
+    Object  Satellite/tle-43442_43442
+    Object  Satellite/tle-43443_43443
+    Object  Satellite/tle-43485_43485
+    Object  Satellite/tle-43678_43678
+    Object  Satellite/tle-43721_43721
+    Object  Satellite/tle-43730_43730
+    Object  Satellite/tle-43737_43737
+    Object  Satellite/tle-43743_43743
+    Object  Satellite/tle-43765_43765
+    Object  Satellite/tle-43767_43767
+    Object  Satellite/tle-43768_43768
+    Object  Satellite/tle-43783_43783
+    Object  Satellite/tle-43790_43790
+    Object  Satellite/tle-43791_43791
+    Object  Satellite/tle-43792_43792
+    Object  Satellite/tle-43794_43794
+    Object  Satellite/tle-43799_43799
+    Object  Satellite/tle-43800_43800
+    Object  Satellite/tle-43812_43812
+    Object  Satellite/tle-43820_43820
+    Object  Satellite/tle-43822_43822
+    Object  Satellite/tle-43890_43890
+    Object  Satellite/tle-43907_43907
+    Object  Satellite/tle-43934_43934
+    Object  Satellite/tle-43935_43935
+    Object  Satellite/tle-43942_43942
+    Object  Satellite/tle-44103_44103
+    Object  Satellite/tle-44389_44389
+    Object  Satellite/tle-44390_44390
+    Object  Satellite/tle-44486_44486
+    Object  Satellite/tle-44488_44488
+    Object  Satellite/tle-44529_44529
+    Object  Satellite/tle-44534_44534
+    Object  Satellite/tle-44536_44536
+    Object  Satellite/tle-44537_44537
+    Object  Satellite/tle-44538_44538
+    Object  Satellite/tle-44539_44539
+    Object  Satellite/tle-44703_44703
+    Object  Satellite/tle-44704_44704
+    Object  Satellite/tle-44824_44824
+    Object  Satellite/tle-44838_44838
+    Object  Satellite/tle-44839_44839
+    Object  Satellite/tle-44879_44879
+    Object  Satellite/tle-44880_44880
+    Object  Satellite/tle-45624_45624
+    Object  Satellite/tle-45796_45796
+    Object  Satellite/tle-46266_46266
+    Object  Satellite/tle-46277_46277
+    Object  Satellite/tle-46278_46278
+    Object  Satellite/tle-46279_46279
+    Object  Satellite/tle-46292_46292
+    Object  Satellite/tle-46293_46293
+    Object  Satellite/tle-46312_46312
+    Object  Satellite/tle-46320_46320
+    Object  Satellite/tle-46489_46489
+    Object  Satellite/tle-46496_46496
+    Object  Satellite/tle-46497_46497
+    Object  Satellite/tle-46931_46931
+    Object  Satellite/tle-47300_47300
+    Object  Satellite/tle-47441_47441
+    Object  Satellite/tle-47485_47485
+    Object  Satellite/tle-47502_47502
+    Object  Satellite/tle-47505_47505
+    Object  Satellite/tle-47506_47506
+    Object  Satellite/tle-47507_47507
+    Object  Satellite/tle-47508_47508
+    Object  Satellite/tle-47509_47509
+    Object  Satellite/tle-47510_47510
+    Object  Satellite/tle-47933_47933
+    Object  Satellite/tle-47934_47934
+    Object  Satellite/tle-47935_47935
+    Object  Satellite/tle-47936_47936
+    Object  Satellite/tle-47940_47940
+    Object  Satellite/tle-47953_47953
+    Object  Satellite/tle-48248_48248
+    Object  Satellite/tle-48249_48249
+    Object  Satellite/tle-48254_48254
+    Object  Satellite/tle-48255_48255
+    Object  Satellite/tle-48272_48272
+    Object  Satellite/tle-48901_48901
+    Object  Satellite/tle-48906_48906
+    Object  Satellite/tle-48910_48910
+    Object  Satellite/tle-48914_48914
+    Object  Satellite/tle-48916_48916
+    Object  Satellite/tle-48917_48917
+    Object  Satellite/tle-48918_48918
+    Object  Satellite/tle-48922_48922
+    Object  Satellite/tle-48926_48926
+    Object  Satellite/tle-48928_48928
+    Object  Satellite/tle-48930_48930
+    Object  Satellite/tle-48931_48931
+    Object  Satellite/tle-48942_48942
+    Object  Satellite/tle-48948_48948
+    Object  Satellite/tle-48950_48950
+    Object  Satellite/tle-48953_48953
+    Object  Satellite/tle-48957_48957
+    Object  Satellite/tle-48962_48962
+    Object  Satellite/tle-48963_48963
+    Object  Satellite/tle-48965_48965
+    Object  Satellite/tle-49007_49007
+    Object  Satellite/tle-49066_49066
+    Object  Satellite/UK-DMC_2_35683
+    Object  Satellite/UNIFORM_1_39767
+    Object  Satellite/WNISAT-1_39423
+    Object  Satellite/X-SAT_37389
+    Object  Satellite/YIJIAN_41899
+   SaveMode    0
+   UseLoadIntervalFile    No
+
+END Definition
+
+BEGIN Extensions
+    
+    BEGIN ADFFileData
+    END ADFFileData
+    
+    BEGIN Desc
+    Begin ShortText
+
+    End ShortText
+    Begin LongText
+
+    End LongText
+    END Desc
+
+END Extensions
+
+END Constellation

@@ -17,7 +17,7 @@ class STK:
     def __init__(self):
         
 
-        def ConnectToSTK(self, version=11,scenarioPath = cwd+'\\Project',scenarioName='MyProject'):
+        def ConnectToSTK(self, version=11,scenarioPath = cwd+'\\Project',scenarioName='Inserimento'):
         # Connect to STK
             # Launch or connect to STK
             try:
@@ -44,11 +44,12 @@ class STK:
         except:
             print("Connection execution not working.")
 
-    def fetchObjectbyName(self, objectName: str):
+    def getByName(self, objectName: str):
         try:
-            object = self.root.CurrentScenario.Children(objectName) # Get Walker object from scenario opened.
-            name=object.InstanceName
+            obj = self.root.CurrentScenario.Children(objectName) # Get Walker object from scenario opened.
+            name=obj.InstanceName
             print(f'Object: {name} fetched.')
+            return obj
         except:
             print('Object not found.')
 
@@ -66,6 +67,32 @@ class STK:
             print('Satellite Added!')
         except:
             print('Not possible to modify Sat propagation.')
+
+    def addSensor(self, SatName: str, SenName: str, params: dict):
+        sat = self.getByName(SatName)
+        # sensor = <satellite_name>.Children.New(STKObjects.eSensor,'MySensor')
+        sensor = sat.Children.New(20,SenName) # eSensor
+        sensor2 = sensor.QueryInterface(STKObjects.IAgSensor)
+        # IAgSensor sensor: Sensor object
+        # Change pattern and set
+        # sensor2.CommonTasks.SetPatternRectangular(20,25)
+        sensor2.CommonTasks.SetPatternSimpleConic(ConeAngle=params['coneAngle'], AngularResolution=params['angularResolution'])
+        # Change pointing and set
+        sensor2.CommonTasks.SetPointingFixedAzEl(params['AzEl'][0],params['AzEl'][1],1) # eAzElAboutBoresightRotate
+        # Change location and set
+        # sensor2.SetLocationType(0) # eSnFixed
+        self.root.ExecuteCommand(f'SetConstraint */Satellite/{SatName}/Sensor/{SenName}  Range Max {str(params["maxRange"])} ')
+
+
+
+        
+    def WalkerDelta(self, SatName: str, params: dict):
+
+        # Generate Walker-Delta:
+        cmd = f'Walker */Satellite/{SatName} Type Custom NumPlanes {params["NumPlanes"]} NumSatsPerPlane {params["NumSatsPerPlane"]} InterPlaneTrueAnomalyIncrement {params["InterPlaneTrueAnomalyIncrement"]} RAANIncrement {params["RAANIncrement"]} ColorByPlane {params["ColorByPlane"]}'
+        # cmd = f'Walker */Satellite/{SatName} Type Custom NumPlanes {params["NumPlanes"]} NumSatsPerPlane {params["NumSatsPerPlane"]} InterPlaneTrueAnomalyIncrement {params["InterPlaneTrueAnomalyIncrement"]} RAANIncrement {params["RAANIncrement"]} ColorByPlane {params["ColorByPlane"]} ConstellationName {params["ConstellationName"]}'
+        self.root.ExecuteCommand(cmd)
+
 
 
     def chainAnalysis(root,chainPath,objsToAdd,startTime,stopTime,exportFileName):
