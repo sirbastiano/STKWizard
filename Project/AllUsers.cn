@@ -166,12 +166,6 @@ BEGIN Extensions
     END ADFFileData
     
     BEGIN Desc
-    Begin ShortText
-
-    End ShortText
-    Begin LongText
-
-    End LongText
     END Desc
 
 END Extensions

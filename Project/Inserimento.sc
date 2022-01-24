@@ -1181,7 +1181,7 @@ BEGIN MapData
             ShowImageNames       Off
             ImageNameFont        0
             Projection           EquidistantCylindrical
-            Resolution           VeryLow
+            Resolution           Low
             CoordinateSys        ECF
             UseBackgroundImage   On
             UseBingForBackground Off
