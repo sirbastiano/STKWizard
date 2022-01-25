@@ -119,11 +119,16 @@ class STK:
         constellation = self.root.CurrentScenario.Children.New(6, ConstellationName)  # eConstellation Object
         constellation2 = constellation.QueryInterface(STKObjects.IAgConstellation)
 
-        for p in range(self.NumPlanes):
-            for n in range(self.NumSatsPerPlane):
-                # constellation2.Objects.Add(f'*/Satellite/mysat{str(p+1)}{AuxilPlanes(n)}/Sensor/Sensor1')
-                constellation2.Objects.Add(f'*/Satellite/mysat{str(p+1)}{str(n+1)}/Sensor/Sensor1')
- 
+        try:
+            for p in range(self.NumPlanes):
+                for n in range(self.NumSatsPerPlane):
+                    # constellation2.Objects.Add(f'*/Satellite/mysat{str(p+1)}{AuxilPlanes(n)}/Sensor/Sensor1')
+                    constellation2.Objects.Add(f'*/Satellite/mysat{str(p+1)}{str(n+1)}/Sensor/Sensor1')
+        except:
+            for p in range(self.NumPlanes):
+                for n in range(self.NumSatsPerPlane):
+                    constellation2.Objects.Add(f'*/Satellite/mysat{AuxilPlanes(p)}{AuxilPlanes(n)}/Sensor/Sensor1')
+
 
 
     def CreateChainObject(self, pathObjToAdd: list, chainName: str):
@@ -191,18 +196,25 @@ class STK:
         sat = self.getByName('mysat')
         sat.Unload()
 
-        # def AuxilPlanes(N: int):
-        #     assert N > -1
-        #     if N < 9:
-        #         stringa = '0'+str(N+1)
-        #         return stringa
-        #     else:
-        #         return str(N+1)
+        def AuxilPlanes(N: int):
+            assert N > -1
+            if N < 9:
+                stringa = '0'+str(N+1)
+                return stringa
+            else:
+                return str(N+1)
 
-        for p in range(self.NumPlanes):
-            for n in range(self.NumSatsPerPlane):
-                sat = self.getByName(f'mysat{str(p+1)}{str(n+1)}')
-                sat.Unload()
+        try:
+            for p in range(self.NumPlanes):
+                for n in range(self.NumSatsPerPlane):
+                    sat = self.getByName(f'mysat{str(p+1)}{str(n+1)}')
+                    sat.Unload()
+
+        except:
+            for p in range(self.NumPlanes):
+                for n in range(self.NumSatsPerPlane):
+                    sat = self.getByName(f'mysat{AuxilPlanes(p)}{AuxilPlanes(n)}')
+                    sat.Unload()
 
         chain = self.getByName('Chain')
         chain.Unload()
