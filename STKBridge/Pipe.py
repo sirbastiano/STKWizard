@@ -26,4 +26,23 @@ class Pipeline(STK):
           mWin, mGap = evaluator(usersList, AccessDict)
           solution = [mWin, mGap, ConstDict['NumSatsPerPlane']*ConstDict['NumPlanes']]
           super()._reset()
-          return solution
+          return solution[0]
+
+
+     def test(self, X: list):
+          assert(len(X)==6)
+          
+          a, i, RAAN, NumPlanes, NumSatxPlane, RAANincerement = X 
+
+          SeedDict = {'a':a, 'e':0,'i':i, 'w':0, 'RAAN':RAAN, 'M':10.5}
+          ConstDict = {'NumPlanes':NumPlanes, 'NumSatsPerPlane':NumSatxPlane, 'InterPlaneTrueAnomalyIncrement': 5, 'RAANIncrement': RAANincerement, 'ColorByPlane': 'Yes'}
+          #####################################################
+          super().addSatellite(SatName='mysat', params=SeedDict)
+          super().addSensor(SatName='mysat', SenName='Sensor1', params={'coneAngle':15, 'angularResolution':0.1, 'AzEl':[90,-90], 'maxRange':1200})
+          super().WalkerDelta(SatName='mysat', params=ConstDict)
+          super().CreateConstellationObject(ConstellationName='Sensors')
+          super().CreateChainObject(pathObjToAdd=['Constellation/AllUsers', 'Constellation/Sensors'], chainName='Chain')
+          usersList, AccessDict = super()._computeChain(chainName='Chain')
+          mWin, mGap = evaluator(usersList, AccessDict)
+          solution = [mWin, mGap, ConstDict['NumSatsPerPlane']*ConstDict['NumPlanes']]
+          return solution[0]
