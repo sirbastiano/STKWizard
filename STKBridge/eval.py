@@ -20,3 +20,25 @@ def evaluator(objectList, AccessDict, printOut=False):
           print(f'Mean Listening Windows Gap (s): {meanGaps}')
 
      return meanListenWindow, meanGaps
+
+
+def new_evaluator(objectList, AccessDict, printOut=False):
+     nUsers, nWin = 0, 0
+     for user in objectList:
+          if user[:5] != "mysat":
+               grabber1 = list(AccessDict[user]['durations'])
+               # grabber2 = list(AccessDict[user]['gaps'])
+               flag = False
+               for elem in grabber1:
+                    if float(elem) > 300:
+                         nWin += 1
+                         flag = True
+               
+               if flag:
+                    nUsers += 1
+
+     score = 0.6 * (nUsers) + 0.4 * (nWin)
+     if printOut:
+          print(f'Score: {score}')
+
+     return score

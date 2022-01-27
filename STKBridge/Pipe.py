@@ -1,6 +1,5 @@
 from STKBridge.Connection import STK
-from STKBridge.eval import evaluator
-
+from STKBridge.eval import evaluator, new_evaluator
 
 class Pipeline(STK):
 
@@ -23,10 +22,14 @@ class Pipeline(STK):
           super().CreateConstellationObject(ConstellationName='Sensors')
           super().CreateChainObject(pathObjToAdd=['Constellation/AllUsers', 'Constellation/Sensors'], chainName='Chain')
           usersList, AccessDict = super()._computeChain(chainName='Chain')
-          mWin, mGap = evaluator(usersList, AccessDict)
-          solution = [mWin, mGap, ConstDict['NumSatsPerPlane']*ConstDict['NumPlanes']]
+          
+          # mWin, mGap = evaluator(usersList, AccessDict)
+          # solution_old = [mWin, mGap, ConstDict['NumSatsPerPlane']*ConstDict['NumPlanes']]
+
+          solution = new_evaluator(usersList, AccessDict)
+
           super()._reset()
-          return solution[0]
+          return solution
 
 
      def test(self, X: list):
