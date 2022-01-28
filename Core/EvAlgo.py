@@ -4,7 +4,7 @@ import pandas as pd
 
 class GA:
 
-     def __init__(self, popSize, nGenerations, nVar, nObj, toKeep):
+     def __init__(self, popSize, nGenerations, nVar, nObj, toKeep, nParents):
           # Input:
           # popSize: size of the population
           # nGenerations: number of generations
@@ -17,6 +17,7 @@ class GA:
           self.nVar = nVar
           self.nObj = nObj
           self.toKeep = toKeep
+          self.nParents = nParents
 
 
 
@@ -101,14 +102,22 @@ class GA:
           df.to_csv(f'gen_{self.idxGen}.csv')
           return True
 
-     def survival(self, nParents, sortBy='Eval'):
+     def survival(self, sortBy='Eval'):
           # Mating: pick parents
           df = pd.read_csv(f'gen_{self.idxGen}.csv')
           df = df.loc[:, ~df.columns.str.contains('^Unnamed')]
           df = df.sort_values(by=sortBy, ascending=False)
 
-          self.dfParents = df.iloc[:nParents, :].reset_index(drop = True)
+          self.dfParents = df.iloc[:self.nParents, :].reset_index(drop = True)
+          self.dfParents
 
+     def InitialPopIdx(self, idx):
+          df = pd.read_csv(f'gen_{idx}.csv')
+          df = df.loc[:, ~df.columns.str.contains('^Unnamed')]
+          df = df.sort_values(by='Eval', ascending=False)
+
+          self.dfParents = df.iloc[:self.nParents, :].reset_index(drop = True)
+          self.dfParents
 
 
      def Crossover(self):
@@ -182,6 +191,7 @@ class GA:
      def duplicateRemover(self):
           df = pd.read_csv(f'gen_{self.idxGen}.csv')
           df = df.loc[:, ~df.columns.str.contains('^Unnamed')]
+          df.drop_duplicates(keep = False, inplace = True) 
           
           while(df.shape[0] < self.popSize):
                # Dropping duplicates

@@ -27,7 +27,7 @@ class STK:
                 root.Isolate()
             except:
                 app = CreateObject('STK{}.Application'.format(version))
-                app.Visible = True
+                app.Visible = False
                 app.UserControl= True
                 root = app.Personality2
                 root.Isolate()
@@ -37,6 +37,9 @@ class STK:
                     root.NewScenario(scenarioName)
             root.UnitPreferences.SetCurrentUnit('DateFormat','Epsec')
             root.ExecuteCommand('Units_SetConnect / Date "Epsec"')
+            root.ExecuteCommand('Parallel / Configuration ParallelType Local')
+            root.ExecuteCommand('Parallel / AutomaticallyComputeInParallel On')
+            root.ExecuteCommand('Parallel / ShutdownLocalWorkers ShutdownLocalWorkersOnJobCompletion On')
 
             self.scenario = root.CurrentScenario
             self.sc=self.scenario.QueryInterface(STKObjects.IAgScenario)
@@ -53,7 +56,7 @@ class STK:
         try:
             obj = self.root.CurrentScenario.Children(objectName) # Get Walker object from scenario opened.
             name=obj.InstanceName
-            print(f'Object: {name} fetched.')
+            # print(f'Object: {name} fetched.')
             return obj
         except:
             print('Object not found.')
@@ -69,7 +72,7 @@ class STK:
         try:
             self.root.ExecuteCommand('SetUnits / km') # Default Connect Units are meters
             self.root.ExecuteCommand(f'SetState */Satellite/{SatName} Classical J4Perturbation "UseAnalysisStartTime" "UseAnalysisStopTime" 60 ICRF "UseAnalysisStartTime" {params["a"]} {params["e"]} {params["i"]} {params["w"]} {params["RAAN"]} {params["M"]}')
-            print('Satellite Added!')
+            # print('Satellite Added!')
         except:
             print('Not possible to modify Sat propagation.')
 
@@ -101,7 +104,7 @@ class STK:
         cmd = f'Walker */Satellite/{SatName} Type Custom NumPlanes {params["NumPlanes"]} NumSatsPerPlane {params["NumSatsPerPlane"]} InterPlaneTrueAnomalyIncrement {params["InterPlaneTrueAnomalyIncrement"]} RAANIncrement {params["RAANIncrement"]} ColorByPlane {params["ColorByPlane"]}'
         # cmd = f'Walker */Satellite/{SatName} Type Custom NumPlanes {params["NumPlanes"]} NumSatsPerPlane {params["NumSatsPerPlane"]} InterPlaneTrueAnomalyIncrement {params["InterPlaneTrueAnomalyIncrement"]} RAANIncrement {params["RAANIncrement"]} ColorByPlane {params["ColorByPlane"]} ConstellationName {params["ConstellationName"]}'
         self.root.ExecuteCommand(cmd)
-        print("Walker Delta constellation generated.")
+        # print("Walker Delta constellation generated.")
 
 
     def getMySats(self):
@@ -151,7 +154,7 @@ class STK:
         for elem in pathObjToAdd:
             chain2.Objects.Add(elem)
         
-        print(f"Chain ({chainName}) object with sensors generated.")
+        # print(f"Chain ({chainName}) object with sensors generated.")
 
     def _computeChain(self, chainName: str):
         # Helper function to compute the gaps between accesses
@@ -194,7 +197,7 @@ class STK:
             objectList.append(objectName)
             AccessDict[objectName] = {'startTimes':StartTimes, 'stopTimes':StopTimes, 'durations':durations, 'gaps': promptGaps(StartTimes, StopTimes)}
         
-        print(f"Chain access computation for chain ({chainName}) executed.")
+        # print(f"Chain access computation for chain ({chainName}) executed.")
 
 
         return objectList, AccessDict
@@ -234,7 +237,7 @@ class STK:
         chain = self.getByName('Chain')
         chain.Unload()
 
-        print("Reset completed successfully.")
+        # print("Reset completed successfully.")
 
 
 
