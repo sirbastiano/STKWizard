@@ -39,10 +39,11 @@ class GA:
           x[2] = np.random.randint(60,100)         # RAAN
           x[3] = np.random.randint(1,150)            # NumPlanes
           x[4] = np.random.randint(1,150)            # NumSatxPlane
-          # MAX 150 SATELLITES CONDITION:
+          ############## MAX 250 SATELLITES CONDITION:##############
           while(x[3]*x[4])>250:
                x[3] = np.random.randint(1,150)      # NumPlanes
                x[4] = np.random.randint(1,150)      # NumSatxPlane
+          #################### ENDING CONDITION:####################
           x[5] = np.random.random(1)[0]*10         # InterRAAN
 
           return x

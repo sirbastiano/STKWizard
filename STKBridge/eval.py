@@ -42,3 +42,23 @@ def new_evaluator(objectList, AccessDict, printOut=False):
           print(f'Score: {score}')
 
      return score
+
+
+def user_evaluator(objectList, AccessDict, nSats, printOut=False):
+     nUsers =  0
+     for user in objectList:
+          if user[:5] != "mysat":
+               grabber1 = list(AccessDict[user]['durations'])
+               flag = False
+               for elem in grabber1:
+                    if float(elem) > 300:
+                         flag = True
+               
+               if flag:
+                    nUsers += 1
+
+     score = nUsers - nSats * 0.5
+     if printOut:
+          print(f'Score: {score}')
+
+     return score

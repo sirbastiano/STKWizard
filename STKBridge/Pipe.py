@@ -1,5 +1,5 @@
 from STKBridge.Connection import STK
-from STKBridge.eval import evaluator, new_evaluator
+from STKBridge.eval import evaluator, new_evaluator, user_evaluator
 
 class Pipeline(STK):
 
@@ -12,6 +12,7 @@ class Pipeline(STK):
           assert(len(X)==6)
           
           a, i, RAAN, NumPlanes, NumSatxPlane, RAANincerement = X 
+          nSats = NumPlanes * NumSatxPlane
 
           SeedDict = {'a':a, 'e':0,'i':i, 'w':0, 'RAAN':RAAN, 'M':10.5}
           ConstDict = {'NumPlanes':NumPlanes, 'NumSatsPerPlane':NumSatxPlane, 'InterPlaneTrueAnomalyIncrement': 5, 'RAANIncrement': RAANincerement, 'ColorByPlane': 'Yes'}
@@ -22,12 +23,9 @@ class Pipeline(STK):
           super().CreateConstellationObject(ConstellationName='Sensors')
           super().CreateChainObject(pathObjToAdd=['Constellation/AllUsers', 'Constellation/Sensors'], chainName='Chain')
           usersList, AccessDict = super()._computeChain(chainName='Chain')
-          
           # mWin, mGap = evaluator(usersList, AccessDict)
           # solution_old = [mWin, mGap, ConstDict['NumSatsPerPlane']*ConstDict['NumPlanes']]
-
-          solution = new_evaluator(usersList, AccessDict)
-
+          solution = user_evaluator(usersList, AccessDict, nSats)
           super()._reset()
           return solution
 

@@ -3,6 +3,7 @@ import comtypes
 import os
 from comtypes.client import GetActiveObject, CreateObject
 import pandas as pd
+from time import sleep
 
 FIRST_RUN_EVER = False
 
@@ -27,7 +28,7 @@ class STK:
                 root.Isolate()
             except:
                 app = CreateObject('STK{}.Application'.format(version))
-                app.Visible = False
+                app.Visible = False 
                 app.UserControl= True
                 root = app.Personality2
                 root.Isolate()
@@ -37,9 +38,9 @@ class STK:
                     root.NewScenario(scenarioName)
             root.UnitPreferences.SetCurrentUnit('DateFormat','Epsec')
             root.ExecuteCommand('Units_SetConnect / Date "Epsec"')
-            root.ExecuteCommand('Parallel / Configuration ParallelType Local')
-            root.ExecuteCommand('Parallel / AutomaticallyComputeInParallel On')
-            root.ExecuteCommand('Parallel / ShutdownLocalWorkers ShutdownLocalWorkersOnJobCompletion On')
+            root.ExecuteCommand('Parallel /Scenario/Inserimento Configuration ParallelType Local ShutdownLocalWorkersOnJobCompletion On AutomaticallyComputeInParallel On')
+
+            # root.ExecuteCommand('Parallel /Scenario/Inserimento ShutdownLocalWorkers')
 
             self.scenario = root.CurrentScenario
             self.sc=self.scenario.QueryInterface(STKObjects.IAgScenario)
@@ -70,6 +71,7 @@ class STK:
         except:
             print('Not possible to create Satellite.')
         try:
+            sleep(1) # Sleep for 1 second
             self.root.ExecuteCommand('SetUnits / km') # Default Connect Units are meters
             self.root.ExecuteCommand(f'SetState */Satellite/{SatName} Classical J4Perturbation "UseAnalysisStartTime" "UseAnalysisStopTime" 60 ICRF "UseAnalysisStartTime" {params["a"]} {params["e"]} {params["i"]} {params["w"]} {params["RAAN"]} {params["M"]}')
             # print('Satellite Added!')
