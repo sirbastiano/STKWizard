@@ -90,6 +90,7 @@ class GA:
           for index, row in df.iterrows():
                sol = function(row.to_list()) # Evaluate
                evals.append(sol)             # Store 
+               print(f"Individual n.{index} of Gen {self.idxGen} prompted.")
 
           if self.nObj > 1:
                for idx in range(self.nObj):

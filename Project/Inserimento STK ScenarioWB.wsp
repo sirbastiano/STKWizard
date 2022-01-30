@@ -4,7 +4,7 @@ Title=Inserimento
 Description=
 ApplicationVersion=11.2.0
 Scenario=YES
-ActiveMDIState=TRUE
+ActiveMDIState=FALSE
 [WorkState_v1_2]
 ptn_Child1=Frames
 [WorkState_v1_2.Frames]
@@ -12,20 +12,19 @@ ptn_Child1=MainFrame
 ptn_Child2=ChildFrames
 [WorkState_v1_2.Frames.MainFrame]
 WindowPlacement=MCAAAAAACAAAAAAADAAAAAAAAAAAAAAAAAAAAAAAPPPPPPPPPPPPPPPPLEAAAAAACAAAAAAALJFAAAAAGDDAAAAA
-Title=Inserimento - STK 11 - Object Browser - [2D Graphics 1 - Earth]
+Title=Inserimento - STK 11 - 3D Graphics 1 - Earth
 [WorkState_v1_2.Frames.ChildFrames]
 ptn_Child1=Document-0
 ptn_Child2=Document-1
 ptn_Child3=Document-2
-ptn_Child4=Document-3
 [WorkState_v1_2.Frames.ChildFrames.Document-0]
 ptn_Child1=ViewFrame-0
 [WorkState_v1_2.Frames.ChildFrames.Document-0.ViewFrame-0]
-DocPathName=C:\WINDOWS\system32\AgUi3DGfxView11.AgUiPi3DGfxView.1
+DocPathName=C:\Program Files\AGI\STK 11\bin\AgUi3DGfxView11.AgUiPi3DGfxView.1
 DocumentString=AgUi3DGfxView.AgUiPi3DGfxView.1
 DocTemplateIndex=0
-WindowPlacement=MCAAAAAAAAAAAAAABAAAAAAAPPPPPPPPPPPPPPPPGPPPPPPPPNPPPPPPBAAAAAAABAAAAAAAMCCAAAAALMBAAAAA
-IsActiveChildFrame=False
+WindowPlacement=MCAAAAAAAAAAAAAABAAAAAAAPPPPPPPPPPPPPPPPGPPPPPPPPNPPPPPPBAAAAAAABAAAAAAAGHDAAAAAJHCAAAAA
+IsActiveChildFrame=True
 IsFrameVisible=True
 ptn_Child1=AGI Custom Node Data
 [WorkState_v1_2.Frames.ChildFrames.Document-0.ViewFrame-0.AGI Custom Node Data]
@@ -34,38 +33,26 @@ SceneType=1
 [WorkState_v1_2.Frames.ChildFrames.Document-1]
 ptn_Child1=ViewFrame-0
 [WorkState_v1_2.Frames.ChildFrames.Document-1.ViewFrame-0]
-DocPathName=C:\WINDOWS\system32\AgUi2DGfxView11.AgUiPi2DGfxView.1
-DocumentString=AgUi2DGfxView.AgUiPi2DGfxView.1
-DocTemplateIndex=0
-WindowPlacement=MCAAAAAACAAAAAAADAAAAAAAPPPPPPPPPPPPPPPPIPPPPPPPBOPPPPPPOCCAAAAABAAAAAAAEFEAAAAAOEBAAAAA
-IsActiveChildFrame=False
-IsFrameVisible=True
-ptn_Child1=AGI Custom Node Data
-[WorkState_v1_2.Frames.ChildFrames.Document-1.ViewFrame-0.AGI Custom Node Data]
-MapID=1
-[WorkState_v1_2.Frames.ChildFrames.Document-2]
-ptn_Child1=ViewFrame-0
-[WorkState_v1_2.Frames.ChildFrames.Document-2.ViewFrame-0]
-DocPathName=C:\WINDOWS\system32\AgUiAttrBrowser11.AgUiPiAttrBrowser.1
+DocPathName=C:\Program Files\AGI\STK 11\bin\AgUiAttrBrowser11.AgUiPiAttrBrowser.1
 DocumentString=AgUiAttrBrowser.AgUiPiAttrBrowser.1
 DocTemplateIndex=0
-WindowPlacement=MCAAAAAAAAAAAAAABAAAAAAAPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPAAAAAAAAAAAAAAAAAKBAAAAACCEAAAAA
+WindowPlacement=MCAAAAAAAAAAAAAABAAAAAAAPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPAAAAAAAAAAAAAAAAAKBAAAAADKCAAAAA
 IsActiveChildFrame=False
 IsFrameVisible=True
 ProfUISBarID=63000
 ptn_Child1=AGI Custom Node Data
-[WorkState_v1_2.Frames.ChildFrames.Document-3]
+[WorkState_v1_2.Frames.ChildFrames.Document-2]
 ptn_Child1=ViewFrame-0
-[WorkState_v1_2.Frames.ChildFrames.Document-3.ViewFrame-0]
-DocPathName=C:\WINDOWS\system32\AgUiTimelineView11.AgUiPiTimelineView.1
+[WorkState_v1_2.Frames.ChildFrames.Document-2.ViewFrame-0]
+DocPathName=C:\Program Files\AGI\STK 11\bin\AgUiTimelineView11.AgUiPiTimelineView.1
 DocumentString=AgUiTimelineView.AgUiPiTimelineView.1
 DocTemplateIndex=0
-WindowPlacement=MCAAAAAAAAAAAAAABAAAAAAAPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPAAAAAAAAAAAAAAAAAAKAAAAAOJAAAAAA
+WindowPlacement=MCAAAAAAAAAAAAAABAAAAAAAPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPAAAAAAAAAAAAAAAAAIHAAAAAOJAAAAAA
 IsActiveChildFrame=False
 IsFrameVisible=True
 ProfUISBarID=63001
 ptn_Child1=AGI Custom Node Data
-[WorkState_v1_2.Frames.ChildFrames.Document-3.ViewFrame-0.AGI Custom Node Data]
+[WorkState_v1_2.Frames.ChildFrames.Document-2.ViewFrame-0.AGI Custom Node Data]
 ComponentWellWidth=200.000000000000
 CurrentContentView=Scenario Availability
 CurrentTimeView=Scenario Analysis Period

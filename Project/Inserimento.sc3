@@ -231,29 +231,6 @@ BeginCentralBody "Earth"
         BaseOn Yes
     End
 EndCentralBody
-BeginCentralBody "Moon"
-    Show Yes
-    Textured Yes
-    AltOffset 0.000000
-    Color #ffffff
-    SpecularColor #545454
-    Shininess 40.000000
-    ShowWater No
-    _AGI_PIBEGINTERRAINIMAGECALLDATA "SRC"
-        BlendMode Value
-        BlendFactor 1.000000
-        BlendAltitudeLowerFactor 1.000000
-        BlendAltitudeUpperFactor 0.000000
-        BlendAltitudeLowerAltitude 500000.000000
-        BlendAltitudeUpperAltitude 2500000.000000
-        TextureRole Day
-        URI "file:///Moon.jp2"
-        BeginImageSetDefOn
-        End
-        InBase Yes
-        BaseOn Yes
-    End
-EndCentralBody
 BeginCentralBody "Sun"
     Show Yes
     Textured No
@@ -271,6 +248,29 @@ BeginCentralBody "Sun"
         BlendAltitudeUpperAltitude 2500000.000000
         TextureRole Day
         URI "file:///Sun.jp2"
+        BeginImageSetDefOn
+        End
+        InBase Yes
+        BaseOn Yes
+    End
+EndCentralBody
+BeginCentralBody "Moon"
+    Show Yes
+    Textured Yes
+    AltOffset 0.000000
+    Color #ffffff
+    SpecularColor #545454
+    Shininess 40.000000
+    ShowWater No
+    _AGI_PIBEGINTERRAINIMAGECALLDATA "SRC"
+        BlendMode Value
+        BlendFactor 1.000000
+        BlendAltitudeLowerFactor 1.000000
+        BlendAltitudeUpperFactor 0.000000
+        BlendAltitudeLowerAltitude 500000.000000
+        BlendAltitudeUpperAltitude 2500000.000000
+        TextureRole Day
+        URI "file:///Moon.jp2"
         BeginImageSetDefOn
         End
         InBase Yes
@@ -363,12 +363,12 @@ EndCentralBody
                     ShowLabel No
                 EndCentralBody
                 BeginCentralBody
-                    Name "Moon"
-                    ShowLabel Yes
-                EndCentralBody
-                BeginCentralBody
                     Name "Sun"
                     ShowLabel No
+                EndCentralBody
+                BeginCentralBody
+                    Name "Moon"
+                    ShowLabel Yes
                 EndCentralBody
             End CentralBodyOpts
             isShowingOverlay            Yes
@@ -653,6 +653,10 @@ EndCentralBody
             RubberBandLineWidth       2.000000
             RubberBandCrosshairSize   16
             RubberBandRGB             0.660000 0.660000 0.660000
+    _AGI_PIBEGINTYPEMGR3DSCENEDATA
+        Begin 3dScene
+        End
+    End
             Begin View
                 ViewName                STKVOInitialView
                 ViewTime                0.000000
@@ -694,9 +698,9 @@ EndCentralBody
                 UseLayer                Yes
                 FromName                "Earth"
                 FromRegPosAttView       "Point"
-                FromPosition            34105341.070907972753047943  9333951.877882953733205795  -6164544.018500638194382191
-                FromOffset              34105341.070907972753047943  9333951.877882953733205795  -6164544.018500638194382191
-                FromOffsetLLR           -0.172604166836967804  0.267138661939363753  35892876.036584600806236267
+                FromPosition            22323905.380115352571010590  27489649.924091465771198273  5853285.044159667566418648
+                FromOffset              22323905.380115352571010590  27489649.924091465771198273  5853285.044159667566418648
+                FromOffsetLLR           0.163808109975952576  0.888730390560405925  35892876.036584585905075073
                 ToName                  "Earth"
                 ToRegPosAttView         "Point"
                 ToPosition              0.000000000000000000  0.000000000000000000  0.000000000000000000
@@ -704,9 +708,9 @@ EndCentralBody
                 ToOffsetLLR             0.000000000000000000  0.000000000000000000  0.000000000000000000
                 ConstantDistanceType    None
                 ConstantDistanceValue   1.000000
-                UpVector                0.165656511201681428  0.045336884348985876  0.985140846383913749
+                UpVector                -0.102803123028388885  -0.126591732720339689  0.986613425360952645
                 ViewRad                 35892876.036584600806236267
-                ViewQuat                0.1326769 -0.0854272 -0.0114788 -0.9874043
+                ViewQuat                0.4284437 0.0738672 0.0351700 -0.8998570
                 ViewCoordSystem         From
                 ViewFromToMode          FromTo
                 ViewToCBIMtx            1.000000000000000000 0.000000000000000000 0.000000000000000000 0.000000000000000000 1.000000000000000000 0.000000000000000000  0.000000000000000000 0.000000000000000000 1.000000000000000000
@@ -720,7 +724,7 @@ EndCentralBody
                 MinAngleToUpAxis        0.0087266
                 InitUpAxisUp            Yes
                 TempUpAxisUp            Yes
-                CrossAxis               0.2639727 -0.9645302 0.0000000
+                CrossAxis               0.7762720 -0.6303981 0.0000000
                 DefaultOffset           35079753.5000000
                 BaseDefaultOffset       6378137.0000000
             End View

@@ -57,7 +57,7 @@ def user_evaluator(objectList, AccessDict, nSats, printOut=False):
                if flag:
                     nUsers += 1
 
-     score = nUsers - nSats * 0.5
+     score = max([nUsers - nSats * 0.5, 0])
      if printOut:
           print(f'Score: {score}')
 

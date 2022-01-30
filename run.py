@@ -25,7 +25,7 @@ def main():
                     self.idxGen += 1
 
 
-     Alg = Optimizer(popSize=50, nGenerations = 20, nVar=6, nObj=1, toKeep=5)
+     Alg = Optimizer(popSize=20, nGenerations = 50, nVar=6, nObj=1, toKeep=5)
      Alg.run(startWith=2)
 
 

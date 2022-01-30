@@ -100,6 +100,7 @@ BEGIN ScenarioLicenses
     Module    RT3Clientv11.2
     Module    RdrAdvEnv11.2
     Module    SEETv11.2
+    Module    SOLISv11.2
     Module    STKCAP
     Module    STKExpertv11.2
     Module    STKIntegrationv11.2
@@ -253,10 +254,7 @@ BEGIN Extensions
 		AviatorSmallTimeUnit		Seconds
 		AviatorEnergyUnit		kilowatt-hours
 		BitsUnit		MegaBits
-		RadiationDose		Rads
 		MagneticFieldUnit		nanoTesla
-		RadiationShieldThickness		Mils
-		ParticleEnergy		MeV
     END Units
     
     BEGIN ReportUnits
@@ -303,10 +301,7 @@ BEGIN Extensions
 		AviatorSmallTimeUnit		Seconds
 		AviatorEnergyUnit		kilowatt-hours
 		BitsUnit		MegaBits
-		RadiationDose		Rads
 		MagneticFieldUnit		nanoTesla
-		RadiationShieldThickness		Mils
-		ParticleEnergy		MeV
     END ReportUnits
     
     BEGIN ConnectReportUnits
@@ -353,10 +348,7 @@ BEGIN Extensions
 		AviatorSmallTimeUnit		Seconds
 		AviatorEnergyUnit		kilowatt-hours
 		BitsUnit		MegaBits
-		RadiationDose		Rads
 		MagneticFieldUnit		nanoTesla
-		RadiationShieldThickness		Mils
-		ParticleEnergy		MeV
     END ConnectReportUnits
     
     BEGIN ReportFavorites
@@ -561,6 +553,12 @@ BEGIN Extensions
     END ExportDataFile
     
     BEGIN Desc
+    Begin ShortText
+
+    End ShortText
+    Begin LongText
+
+    End LongText
     END Desc
     
     BEGIN RfEnv
@@ -1049,19 +1047,6 @@ BEGIN Extensions
     BEGIN Crdn
     END Crdn
     
-    BEGIN ScenSpaceEnvironment
-
-        Begin RadiationEnvironment
-
-           NasaModelsActivity      SolarMin
-           CrresProActivity        Quiet
-           CrresRadActivity        Average
-           UseDefaultNasaEnergies  Yes
-
-        End RadiationEnvironment
-
-    END ScenSpaceEnvironment
-    
     BEGIN SpiceExt
     END SpiceExt
     
@@ -1076,7 +1061,7 @@ BEGIN Animation
     EndTime            6 Jan 2022 11:00:00.000000000
     CurrentTime        5 Jan 2022 11:00:00.000000000
     Direction          Forward
-    UpdateDelta        10.000000
+    UpdateDelta        20.000000
     RefreshDelta       0.010000
     XRealTimeMult      1.000000
     RealTimeOffset     0.000000
@@ -1148,222 +1133,6 @@ BEGIN MapData
     TextShadowStyle          Dark
     TextShadowColor          #000000
     BingLevelOfDetailScale   2.000000
-    BEGIN Map
-        MapNum         1
-        TrackingMode   LatLon
-        PickEnabled    On
-        PanEnabled     On
-
-        BEGIN MapAttributes
-            PrimaryBody          Earth
-            SecondaryBody        Sun
-            CenterLatitude       0.000000
-            CenterLongitude      0.000000
-            ProjectionAltitude   63621860.000000
-            FieldOfView          35.000000
-            OrthoDisplayDistance 20000000.000000
-            TransformTrajectory  On
-            EquatorialRadius     6378137.000000
-            BackgroundColor      #000000
-            LatLonLines          On
-            LatSpacing           30.000000
-            LonSpacing           30.000000
-            LatLonLineColor      #999999
-            LatLonLineStyle      2
-            ShowOrthoDistGrid    Off
-            OrthoGridXSpacing    5
-            OrthoGridYSpacing    5
-            OrthoGridColor       #ffffff
-            ShowImageExtents     Off
-            ImageExtentLineColor #ffffff
-            ImageExtentLineStyle 0
-            ImageExtentLineWidth 1.000000
-            ShowImageNames       Off
-            ImageNameFont        0
-            Projection           EquidistantCylindrical
-            Resolution           Low
-            CoordinateSys        ECF
-            UseBackgroundImage   On
-            UseBingForBackground Off
-            BingType             Aerial
-            BingLogoHorizAlign   Right
-            BingLogoVertAlign    Bottom
-            BackgroundImageFile  Basic.bmp
-            UseNightLights       Off
-            NightLightsFactor    3.500000
-            UseCloudsFile        Off
-            BEGIN ZoomLocations
-                BEGIN ZoomLocation
-                    CenterLat    0.000000
-                    CenterLon    0.000000
-                    ZoomWidth    359.999998
-                    ZoomHeight   180.000000
-                End ZoomLocation
-            END ZoomLocations
-            UseVarAspectRatio    No
-            SwapMapResolution    Yes
-            NoneToVLowSwapDist   2000000.000000
-            VLowToLowSwapDist    20000.000000
-            LowToMediumSwapDist  10000.000000
-            MediumToHighSwapDist 5000.000000
-            HighToVHighSwapDist  1000.000000
-            VHighToSHighSwapDist 100.000000
-            BEGIN Axes
-                DisplayAxes no
-                CoordSys    CBI
-                2aryCB      Sun
-                Display+x   yes
-                Label+x     yes
-                Color+x     #ffffff
-                Scale+x     3.000000
-                Display-x   yes
-                Label-x     yes
-                Color-x     #ffffff
-                Scale-x     3.000000
-                Display+y   yes
-                Label+y     yes
-                Color+y     #ffffff
-                Scale+y     3.000000
-                Display-y   yes
-                Label-y     yes
-                Color-y     #ffffff
-                Scale-y     3.000000
-                Display+z   yes
-                Label+z     yes
-                Color+z     #ffffff
-                Scale+z     3.000000
-                Display-z   yes
-                Label-z     yes
-                Color-z     #ffffff
-                Scale-z     3.000000
-            END Axes
-
-        END MapAttributes
-
-        BEGIN MapList
-            BEGIN Detail
-                Alias RWDB2_Coastlines
-                Show Yes
-                Color #8fbc8f
-            END Detail
-            BEGIN Detail
-                Alias RWDB2_International_Borders
-                Show No
-                Color #8fbc8f
-            END Detail
-            BEGIN Detail
-                Alias RWDB2_Islands
-                Show No
-                Color #8fbc8f
-            END Detail
-            BEGIN Detail
-                Alias RWDB2_Lakes
-                Show No
-                Color #87cefa
-            END Detail
-            BEGIN Detail
-                Alias RWDB2_Provincial_Borders
-                Show No
-                Color #8fbc8f
-            END Detail
-            BEGIN Detail
-                Alias RWDB2_Rivers
-                Show No
-                Color #87cefa
-            END Detail
-        END MapList
-
-
-        BEGIN MapAnnotations
-        END MapAnnotations
-
-        BEGIN DisplayFlags
-            ShowLabels           On
-            ShowPassLabel        Off
-            ShowElsetNum         Off
-            ShowGndTracks        On
-            ShowGndMarkers       On
-            ShowOrbitMarkers     On
-            ShowPlanetOrbits     Off
-            ShowPlanetCBIPos     On
-            ShowPlanetCBILabel   On
-            ShowPlanetGndPos     On
-            ShowPlanetGndLabel   On
-            ShowSensors          On
-            ShowWayptMarkers     Off
-            ShowWayptTurnMarkers Off
-            ShowOrbits           On
-            ShowDtedRegions      Off
-            ShowAreaTgtCentroids On
-            ShowToolBar          On
-            ShowStatusBar        On
-            ShowScrollBars       On
-            AllowAnimUpdate      Off
-            AccShowLine          On
-            AccAnimHigh          On
-            AccStatHigh          On
-            ShowPrintButton      On
-            ShowAnimButtons      On
-            ShowAnimModeButtons  On
-            ShowZoomMsrButtons   On
-            ShowMapCbButton      Off
-        END DisplayFlags
-
-        BEGIN SoftVTR
-            OutputFormat     WMV
-            Directory        C:\Users\Carla\Documents\STK 11 (x64)\Scenario1
-            BaseName         Frame
-            Digits           4
-            Frame            0
-            LastAnimTime     0.000000
-            OutputMode       Normal
-            HiResAssembly    Assemble
-            HRWidth          6000
-            HRHeight         4500
-            HRDPI            600.000000
-            UseSnapInterval  No
-            SnapInterval     0.000000
-            WmvCodec         "Windows Media Video 9"
-            Framerate        30
-            Bitrate          3000000
-        END SoftVTR
-
-
-        BEGIN TimeDisplay
-            Show             0
-            TextColor        #ffffff
-            TextTranslucency 0.000000
-            ShowBackground   0
-            BackColor        #4d4d4d
-            BackTranslucency 0.400000
-            XPosition        20
-            YPosition        -20
-        END TimeDisplay
-
-        BEGIN LightingData
-            DisplayAltitude              0.000000
-            SubsolarPoint                Off
-            SubsolarPointColor           #ffff00
-            SubsolarPointMarkerStyle     2
-
-            ShowUmbraLine                Off
-            UmbraLineColor               #000000
-            UmbraLineStyle               0
-            UmbraLineWidth               2
-            FillUmbra                    On
-            UmbraFillColor               #000000
-            ShowSunlightLine             Off
-            SunlightLineColor            #ffff00
-            SunlightLineStyle            0
-            SunlightLineWidth            2
-            FillSunlight                 On
-            SunlightFillColor            #ffffff
-            SunlightMinOpacity           0.000000
-            SunlightMaxOpacity           0.200000
-            UmbraMaxOpacity              0.700000
-            UmbraMinOpacity              0.400000
-        END LightingData
-    END Map
 
     BEGIN MapStyles
 
@@ -1765,35 +1534,6 @@ END MapData
     
     BEGIN VO
     END VO
-    
-    BEGIN ScenSpaceEnvironmentGfx
-
-        Begin Gfx
-
-           Begin MagFieldGfx
-               Show               No
-               ColorBy            Magnitude
-               ColorScale         Log
-               ColorRampStart     #0000ff
-               ColorRampStart     #0000ff
-               ColorRampStop      #ff0000
-               MaxTranslucency    0.700000
-               LineStyle          0
-               LineWidth          2.000000
-               FieldLineRefresh   300.000000
-               NumLats            8
-               NumLongs           6
-               StartLat           15.000000
-               StopLat            85.000000
-               RefLongitude       3.141593
-               MainField          IGRF
-               ExternalField      None
-               IGRF_UpdateRate    86400.000000
-           End MagFieldGfx
-
-        End Gfx
-
-    END ScenSpaceEnvironmentGfx
     
     BEGIN DIS
 

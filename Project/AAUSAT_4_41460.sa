@@ -536,102 +536,6 @@ Operational Status	Active
     BEGIN Crdn
     END Crdn
     
-    BEGIN SpaceEnvironment
-
-        Begin VehicleTemperature
-
-           EarthAlbedo           0.340000
-           MaterialEmissivity    0.924000
-           MaterialAbsorptivity   0.248000
-           Dissipation           0.000000
-           CrossSectionalArea    1.000000
-           VehShapeModel         Sphere
-
-           NormalVector
-					Sun
-
-        End VehicleTemperature
-
-
-        Begin ParticleFlux
-
-           Material            Aluminum
-           Density             2700.000000
-           Tensile             400.000000
-           SatArea             1.000000
-           PitDepth            0.001000
-           F10.7Source         StaticValue
-           F10.7               150.000000
-           FluxFile            SpaceWeather-v1.2.txt
-           UseSporadicMeteors  Yes
-
-        End ParticleFlux
-
-
-        Begin MagneticField
-
-           MainField        IGRF
-           ExternalField    None
-           IGRF_UpdateRate  86400.000000
-
-        End MagneticField
-
-
-        Begin Radiation
-
-           VersionIndicator         20100729
-           CompMode                 RadOnly
-           UseModelEpoch            Yes
-           ShiftSAA                 Yes
-           DoseIntegStep            60.000
-           DoseReportStep           21600.000
-           DoseChannel              Total
-           UseNuclearAttenuation    No
-           IncludeNucAttenNeutrons  No
-           DetectorGeometry         SemiInfiniteSlab
-           DetectorType             Silicon
-           ApSource                 StaticValue
-           Ap15Avg                  10.000000
-           FluxFile                 SpaceWeather-v1.2.txt
-
-        End Radiation
-
-
-        Begin SAAContour
-
-           Channel          >23MeV
-           FluxLevel        Background+3Sigma
-
-        End SAAContour
-
-
-        Begin GCRSettings
-
-           GCRModel                     BO10
-           SolarInfluence               SolarMax
-           AtomicNumber                 1
-           InterplanetaryWeatherIndex   1
-           PHI                          450.000000
-           SampleTime                   0.250000
-
-        End GCRSettings
-
-
-        Begin SEPSettings
-
-           SEPModel                     JPL91
-           Duration                    3.000000
-           Probability                 90.000000
-           Energy                    1.000000
-           Energy                    4.000000
-           Energy                    10.000000
-           Energy                    30.000000
-           Energy                    60.000000
-
-        End SEPSettings
-
-    END SpaceEnvironment
-    
     BEGIN Graphics
 
         BEGIN GenericGraphics
@@ -959,22 +863,6 @@ Operational Status	Active
             ShowVolume No
         END VolumeGraphics
     END 3dVolume
-    
-    BEGIN SpaceEnvironmentGfx
-        Begin Gfx
-
-           Begin MagFieldLineGfx
-               Show2D       No
-               Show3D       No
-               ShowLabel    Yes
-               Color        #ff0000
-               LineStyle    1
-               LineWidth    2.000000
-           End MagFieldLineGfx
-
-        End Gfx
-
-    END SpaceEnvironmentGfx
     
     BEGIN DIS
 
