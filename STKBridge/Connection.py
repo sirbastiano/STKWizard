@@ -38,7 +38,7 @@ class STK:
                     root.NewScenario(scenarioName)
             root.UnitPreferences.SetCurrentUnit('DateFormat','Epsec')
             root.ExecuteCommand('Units_SetConnect / Date "Epsec"')
-            root.ExecuteCommand('Parallel /Scenario/Inserimento Configuration ParallelType Local ShutdownLocalWorkersOnJobCompletion On AutomaticallyComputeInParallel On')
+            # root.ExecuteCommand('Parallel /Scenario/Inserimento Configuration ParallelType Local ShutdownLocalWorkersOnJobCompletion On AutomaticallyComputeInParallel On')
 
             # root.ExecuteCommand('Parallel /Scenario/Inserimento ShutdownLocalWorkers')
 
@@ -93,11 +93,20 @@ class STK:
         # sensor2.SetLocationType(0) # eSnFixed
         self.root.ExecuteCommand(f'SetConstraint */Satellite/{SatName}/Sensor/{SenName}  Range Max {str(params["maxRange"])} ')
 
+    def removeSeed(self, SatName):
+        scenario = self.root.Children.Item(0)
 
+        for i in range(scenario.Children.Count):
+            child = scenario.Children.Item(i)
+            if child.InstanceName == SatName:
+                SEED = child
+
+        res = SEED.Unload()
+        return res
 
         
     def WalkerDelta(self, SatName: str, params: dict):
-        
+
         self.NumPlanes = params["NumPlanes"]
         self.NumSatsPerPlane = params["NumSatsPerPlane"]
         self.NumSatellites = self.NumPlanes * self.NumSatsPerPlane
@@ -106,17 +115,20 @@ class STK:
         cmd = f'Walker */Satellite/{SatName} Type Custom NumPlanes {params["NumPlanes"]} NumSatsPerPlane {params["NumSatsPerPlane"]} InterPlaneTrueAnomalyIncrement {params["InterPlaneTrueAnomalyIncrement"]} RAANIncrement {params["RAANIncrement"]} ColorByPlane {params["ColorByPlane"]}'
         # cmd = f'Walker */Satellite/{SatName} Type Custom NumPlanes {params["NumPlanes"]} NumSatsPerPlane {params["NumSatsPerPlane"]} InterPlaneTrueAnomalyIncrement {params["InterPlaneTrueAnomalyIncrement"]} RAANIncrement {params["RAANIncrement"]} ColorByPlane {params["ColorByPlane"]} ConstellationName {params["ConstellationName"]}'
         self.root.ExecuteCommand(cmd)
+        sleep(1)
+        self.removeSeed(SatName)
         # print("Walker Delta constellation generated.")
-
 
     def getMySats(self):
         scenario = self.root.Children.Item(0)
         children = []
         for idx in range(scenario.Children.Count):
             child = scenario.Children.Item(idx)
-            if child.InstanceName[:5] == "mysat" and len(child.InstanceName) > 5:
+            if child.InstanceName[1:5] == "seed":
                 children.append(child)
         return children
+
+
         
     def CreateConstellationObject(self, ConstellationName='Sensors'):
         # Helper function:
@@ -209,8 +221,8 @@ class STK:
         SensorsConstellation = self.getByName('Sensors')
         SensorsConstellation.Unload()
 
-        sat = self.getByName('mysat')
-        sat.Unload()
+        # sat = self.getByName('mysat')
+        # sat.Unload()
 
 
         MySatellites = self.getMySats()

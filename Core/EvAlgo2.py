@@ -18,6 +18,7 @@ class GA:
           self.nObj = nObj
           self.toKeep = toKeep
           self.nParents = nParents
+          self.cols = ['a1','a2','RAAN1','RAAN2']
 
 
 
@@ -34,38 +35,31 @@ class GA:
      def Sampling(self):
           x = np.full(self.nVar, None)
          
-          x[0] = np.random.randint(6778,6888)        # a
-          x[1] = np.random.randint(70,130)           # i
-          x[2] = np.random.randint(0,360)            # RAAN
-          x[3] = np.random.randint(1,1)              # NumPlanes
-          x[4] = np.random.randint(30,30)            # NumSatxPlane
-          # ############## MAX 250 SATELLITES CONDITION:##############
-          # while(x[3]*x[4])>250:
-          #      x[3] = np.random.randint(1,150)      # NumPlanes
-          #      x[4] = np.random.randint(1,150)      # NumSatxPlane
-          # #################### ENDING CONDITION:####################
-          x[5] = np.random.random(1)[0]*10         # InterRAAN
-
+          x[0] = np.random.randint(6778,6888)        # a1
+          x[1] = np.random.randint(6778,6888)        # a2
+          x[2] = np.random.randint(0,360)            # RAAN1
+          x[3] = np.random.randint(0,360)            # RAAN2
           return x
+
 
      def popolate(self):
           # First population generated randomically
           if self.idxGen == 0:
-               data = np.zeros(6)
+               data = np.zeros(self.nVar)
                for i in range(self.popSize):
                     x = self.Sampling()
                     data = np.vstack((data,x))
                data=data[1:,:] # remove first row
-               df = pd.DataFrame(data, columns=['a','i','RAAN','NumPlanes','NumSatxPlane','InterRAAN'])
+               df = pd.DataFrame(data, columns=self.cols)
                df.to_csv(f'gen_{self.idxGen}.csv')
           
           
           else:
-               df = pd.DataFrame(columns=['a','i','RAAN','NumPlanes','NumSatxPlane','InterRAAN'])
+               df = pd.DataFrame(columns=self.cols)
 
                for idx in range(self.popSize):
                     if idx < self.toKeep:
-                         individual = self.dfParents.iloc[idx,~self.dfParents.columns.str.contains('Eval')]
+                         individual = self.dfParents.iloc[idx,~self.dfParents.columns.str.contains('Eval') or ~self.dfParents.columns.str.contains('Users')]
                          # TODO: admit to keep the solution.
                     else:
                          r = np.random.rand()
@@ -94,11 +88,13 @@ class GA:
 
           if self.nObj > 1:
                for idx in range(self.nObj):
-                    score = [x[idx] for x in evals]
-                    df.insert(df.shape[1], f'Eval_{idx}', score)
+                    df.insert(df.shape[1], f'Eval_{idx}', evals[idx,:])
                
           else:
-               df.insert(df.shape[1], 'Eval', evals)
+               score = [x[0] for x in evals]
+               df.insert(df.shape[1], 'Eval', score)
+               nUsers = [x[1] for x in evals]
+               df.insert(df.shape[1], 'Users', nUsers)
                
 
           df.to_csv(f'gen_{self.idxGen}.csv')
@@ -130,8 +126,8 @@ class GA:
                while(g1Idx == g2Idx):
                     g1Idx,g2Idx = np.random.randint(0,df.shape[0]), np.random.randint(0,df.shape[0])
 
-               g1 = df.iloc[g1Idx, ~df.columns.str.contains('Eval')]
-               g2 = df.iloc[g2Idx, ~df.columns.str.contains('Eval')]
+               g1 = df.iloc[g1Idx, ~self.dfParents.columns.str.contains('Eval') or ~self.dfParents.columns.str.contains('Users')]
+               g2 = df.iloc[g2Idx, ~self.dfParents.columns.str.contains('Eval') or ~self.dfParents.columns.str.contains('Users')]
 
                return g1,g2
 
@@ -142,24 +138,13 @@ class GA:
 
           genome = np.full(self.nVar, None)
           for idx in range(len(a)):
-               if idx == 3:
-                    r = np.random.rand()
-                    if r < 0.5:
-                         genome[idx] = a[idx]
-                         genome[idx+1] = a[idx+1]
-                    else:
-                         genome[idx] = b[idx]
-                         genome[idx+1] = b[idx+1]
-               elif idx == 4:
-                    continue
+               r = np.random.rand()
+               if r < 0.5:
+                    genome[idx] = a[idx]
                else:
-                    r = np.random.rand()
-                    if r < 0.5:
-                         genome[idx] = a[idx]
-                    else:
-                         genome[idx] = b[idx]
+                    genome[idx] = b[idx]
 
-          individual = pd.DataFrame([genome],columns=['a','i','RAAN','NumPlanes','NumSatxPlane','InterRAAN'])
+          individual = pd.DataFrame([genome], columns=self.cols)
           return individual
 
 
@@ -170,9 +155,10 @@ class GA:
           
           arrParent = Parent.values
 
-          a = np.random.randint(-100,100)
-          i = np.random.randint(-40,40)
-          RAAN = np.random.randint(-40,40)
+          a1 = np.random.randint(-20,20)
+          a2 = np.random.randint(-20,20)
+          RAAN1 = np.random.randint(-40,40)
+          RAAN2 = np.random.randint(-40,40)
           # NumPlanes = np.random.randint(0,3)
           # NumSatxPlane = np.random.randint(0,3)
 
@@ -180,12 +166,12 @@ class GA:
           #      NumPlanes = np.random.randint(0,3)
           #      NumSatxPlane = np.random.randint(0,3)
      
-          InterRAAN = np.random.rand()
+          # InterRAAN = np.random.rand()
 
-          genome = [arrParent[0]+a, arrParent[1]+i, arrParent[2]+RAAN, arrParent[3], arrParent[4], arrParent[5]]
+          genome = [arrParent[0]+a1, arrParent[1]+a2, arrParent[2]+RAAN1, arrParent[3]+RAAN2]
           # genome = [arrParent[0]+a, arrParent[1]+i, arrParent[2]+RAAN, arrParent[3]+NumPlanes, arrParent[4]+NumSatxPlane, arrParent[5]]
 
-          individual = pd.DataFrame([genome],columns=['a','i','RAAN','NumPlanes','NumSatxPlane','InterRAAN'])
+          individual = pd.DataFrame([genome], columns=self.cols)
           return individual
 
 
@@ -200,12 +186,12 @@ class GA:
                df.drop_duplicates(keep = False, inplace = True) 
                
                if df.shape[0] < self.popSize:
-                    data = np.full(6, None)
+                    data = np.full(self.nVar, None)
                     for i in range(self.popSize-df.shape[0]):
                          x = self.Sampling()
                          data = np.vstack((data,x))
                     data=data[1:,:] # remove first row
-                    Added_df = pd.DataFrame(data, columns=['a','i','RAAN','NumPlanes','NumSatxPlane','InterRAAN'])
+                    Added_df = pd.DataFrame(data, columns=self.cols)
                     
                     df = df.append(Added_df)
                

@@ -57,8 +57,33 @@ def user_evaluator(objectList, AccessDict, nSats, printOut=False):
                if flag:
                     nUsers += 1
 
-     score = max([nUsers - nSats * 0.5, 0])
+     score = max([nUsers / nSats, 0])
      if printOut:
           print(f'Score: {score}')
 
      return score
+
+def double_evaluator(objectList, AccessDict, nSats, printOut=False):
+     nUsers =  0
+     nDoubleCounter = 0
+     for user in objectList:
+          if user[:5] != "mysat":
+               grabber1 = list(AccessDict[user]['durations'])
+               flag = False
+               for idx, elem in enumerate(grabber1):
+                    dFlag = False
+                    if float(elem) > 300:
+                         flag = True
+
+                    if flag and not dFlag and idx !=0 and float(elem)> 300:
+                         nDoubleCounter +=1
+                         dFlag = True
+
+               if flag:
+                    nUsers += 1
+
+     score = nUsers + nDoubleCounter
+     if printOut:
+          print(f'Score: {score}')
+
+     return score, nUsers
