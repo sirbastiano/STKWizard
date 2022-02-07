@@ -59,7 +59,8 @@ class GA:
 
                for idx in range(self.popSize):
                     if idx < self.toKeep:
-                         individual = self.dfParents.iloc[idx,~self.dfParents.columns.str.contains('Eval') or ~self.dfParents.columns.str.contains('Users')]
+                         individual = self.dfParents.drop(columns = ['Eval','Users']).iloc[idx,:]
+                         # individual = self.dfParents.iloc[idx,~self.dfParents.columns.str.contains('Eval') or ~self.dfParents.columns.str.contains('Users')]
                          # TODO: admit to keep the solution.
                     else:
                          r = np.random.rand()
@@ -126,8 +127,12 @@ class GA:
                while(g1Idx == g2Idx):
                     g1Idx,g2Idx = np.random.randint(0,df.shape[0]), np.random.randint(0,df.shape[0])
 
-               g1 = df.iloc[g1Idx, ~self.dfParents.columns.str.contains('Eval') or ~self.dfParents.columns.str.contains('Users')]
-               g2 = df.iloc[g2Idx, ~self.dfParents.columns.str.contains('Eval') or ~self.dfParents.columns.str.contains('Users')]
+               df = df.drop(columns=['Eval','Users'])
+               g1 = df.iloc[g1Idx, :]
+               g2 = df.iloc[g2Idx, :]
+
+               # g1 = df.iloc[g1Idx, ~self.dfParents.columns.str.contains('Eval') or ~self.dfParents.columns.str.contains('Users')]
+               # g2 = df.iloc[g2Idx, ~self.dfParents.columns.str.contains('Eval') or ~self.dfParents.columns.str.contains('Users')]
 
                return g1,g2
 
@@ -151,8 +156,9 @@ class GA:
      def Mutate(self):
           # Pick a casual Parent and mutate it
           idx = np.random.randint(0,self.dfParents.shape[0])
-          Parent = self.dfParents.iloc[idx, ~self.dfParents.columns.str.contains('Eval')]
-          
+          # Parent = self.dfParents.iloc[idx, ~self.dfParents.columns.str.contains('Eval')]
+          Parent = self.dfParents.drop(columns = ['Eval','Users']).iloc[idx,:]
+
           arrParent = Parent.values
 
           a1 = np.random.randint(-20,20)

@@ -67,15 +67,15 @@ def double_evaluator(objectList, AccessDict, nSats, printOut=False):
      nUsers =  0
      nDoubleCounter = 0
      for user in objectList:
-          if user[:5] != "mysat":
-               grabber1 = list(AccessDict[user]['durations'])
+          if user[1:5] != "seed":
                flag = False
+               dFlag = False
+               grabber1 = list(AccessDict[user]['durations'])
                for idx, elem in enumerate(grabber1):
-                    dFlag = False
-                    if float(elem) > 300:
+                    if float(elem) > 360:
                          flag = True
 
-                    if flag and not dFlag and idx !=0 and float(elem)> 300:
+                    if flag and not dFlag and idx !=0:
                          nDoubleCounter +=1
                          dFlag = True
 
