@@ -64,25 +64,27 @@ def user_evaluator(objectList, AccessDict, nSats, printOut=False):
      return score
 
 def double_evaluator(objectList, AccessDict, nSats, printOut=False):
-     nUsers =  0
-     nDoubleCounter = 0
-     for user in objectList:
-          if user[1:5] != "seed":
-               flag = False
-               dFlag = False
-               grabber1 = list(AccessDict[user]['durations'])
-               for idx, elem in enumerate(grabber1):
-                    if float(elem) > 360:
-                         flag = True
+     def checkUser(durations):
+          for win in durations:
+               if win > 360:
+                    return True
+               else:
+                    return False
 
-                    if flag and not dFlag and idx !=0:
-                         nDoubleCounter +=1
-                         dFlag = True
+     def checkDoubleUser(durations):
+          goodWin = [d for d in durations if d > 360]
+          if len(goodWin) > 1:
+               print(goodWin)
+               return True
+          else:
+               return False
 
-               if flag:
-                    nUsers += 1
+     servedUsersSingle = [x for x in objectList if (x[1:5] != "seed" and checkUser(AccessDict[x]['durations']))]
+     servedUsersDouble = [y for y in servedUsersSingle if checkDoubleUser(AccessDict[y]['durations'])]
+     
+     nUsers = len(servedUsersSingle)
+     score = nUsers + len(servedUsersDouble)
 
-     score = nUsers + nDoubleCounter
      if printOut:
           print(f'Score: {score}')
 
