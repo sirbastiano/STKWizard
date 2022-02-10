@@ -89,3 +89,34 @@ def double_evaluator(objectList, AccessDict, nSats, printOut=False):
           print(f'Score: {score}')
 
      return score, nUsers
+
+
+def winMean_evaluator(objectList, AccessDict, nSats, printOut=False):
+     def checkUser(durations):
+          for win in durations:
+               if win > 360:
+                    return True
+               else:
+                    return False
+
+     def checkDoubleUser(durations):
+          goodWin = [d for d in durations if d > 360]
+          if len(goodWin) > 1:
+               print(goodWin)
+               return True
+          else:
+               return False
+
+     servedUsersSingle = [x for x in objectList if (x[1:5] != "seed" and checkUser(AccessDict[x]['durations']))]
+     servedUsersDouble = [y for y in servedUsersSingle if checkDoubleUser(AccessDict[y]['durations'])]
+     
+     means = [np.mean(AccessDict[x]['durations']) for x in servedUsersDouble]
+
+     nUsers = len(servedUsersDouble)
+     score = np.mean(means)
+     assert type(score) == np.float64
+
+     if printOut:
+          print(f'Score: {score}')
+
+     return score, nUsers
