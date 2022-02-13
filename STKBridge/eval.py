@@ -132,3 +132,58 @@ def winMean_evaluator(objectList, AccessDict, nSats, printOut=True):
 
 
      return score, nUsers
+
+
+def winMultiple_evaluator(objectList, AccessDict, nSats, printOut=True):
+     """
+     Evaluator that maximizes the number connection windows (>360)/day * servedUsersDouble
+     """
+
+     def checkUser(durations):
+          for win in durations:
+               if win > 360:
+                    return True
+               else:
+                    return False
+
+
+     def countUser(durations):
+          counter = 0
+          for win in durations:
+               if win > 360:
+                    counter += 1
+               else:
+                    pass
+          return counter
+
+
+     def checkDoubleUser(durations):
+          goodWin = [d for d in durations if d > 360]
+          if len(goodWin) > 1:
+               # print(goodWin)
+               return True
+          else:
+               return False
+
+     COUNTER_MEAN = []
+     for user in objectList:
+          counter = countUser(user)
+          COUNTER_MEAN.append(counter)
+
+
+     servedUsersSingle = [x for x in objectList if (x[1:5] != "seed" and checkUser(AccessDict[x]['durations']))]
+     servedUsersDouble = [y for y in servedUsersSingle if checkDoubleUser(AccessDict[y]['durations'])]
+     nUsers = len(servedUsersDouble)
+     
+     if nUsers > 0:
+          COUNTER_MEAN = np.mean(COUNTER_MEAN)
+          score = COUNTER_MEAN*nUsers
+          assert type(score) == np.float64
+
+          if printOut:
+               print(f'Score: {score}')
+     else:
+          score = 0
+          print(f'Score: {score}')
+
+     return score, nUsers
