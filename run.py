@@ -26,9 +26,9 @@ def main():
                     self.idxGen += 1
 
 
-     Alg = Optimizer(popSize=50, nGenerations = 30, nVar=4, nObj=1, toKeep=5)
-     # Alg.run(startWith=18)
-     Alg.run()
+     Alg = Optimizer(popSize=50, nGenerations = 20, nVar=4, nObj=1, toKeep=5)
+     Alg.run(startWith=12)
+     # Alg.run()
 
 
 if __name__ == '__main__':

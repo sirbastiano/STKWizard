@@ -1,3 +1,4 @@
+import re
 import pandas as pd 
 import numpy as np
 
@@ -64,6 +65,9 @@ def user_evaluator(objectList, AccessDict, nSats, printOut=False):
      return score
 
 def double_evaluator(objectList, AccessDict, nSats, printOut=False):
+     """
+     Evaluator that maximizes the number of users with connection window (>360) at least 2/day
+     """
      def checkUser(durations):
           for win in durations:
                if win > 360:
@@ -91,7 +95,10 @@ def double_evaluator(objectList, AccessDict, nSats, printOut=False):
      return score, nUsers
 
 
-def winMean_evaluator(objectList, AccessDict, nSats, printOut=False):
+def winMean_evaluator(objectList, AccessDict, nSats, printOut=True):
+     """
+     Evaluator that maximizes the mean duration of the maximum connection window (>360) at least 2/day
+     """
      def checkUser(durations):
           for win in durations:
                if win > 360:
@@ -102,21 +109,26 @@ def winMean_evaluator(objectList, AccessDict, nSats, printOut=False):
      def checkDoubleUser(durations):
           goodWin = [d for d in durations if d > 360]
           if len(goodWin) > 1:
-               print(goodWin)
+               # print(goodWin)
                return True
           else:
                return False
 
      servedUsersSingle = [x for x in objectList if (x[1:5] != "seed" and checkUser(AccessDict[x]['durations']))]
      servedUsersDouble = [y for y in servedUsersSingle if checkDoubleUser(AccessDict[y]['durations'])]
-     
-     means = [np.mean(AccessDict[x]['durations']) for x in servedUsersDouble]
-
      nUsers = len(servedUsersDouble)
-     score = np.mean(means)
-     assert type(score) == np.float64
+     
+     if nUsers > 0:
+          means = [np.max(AccessDict[x]['durations']) for x in servedUsersDouble]
 
-     if printOut:
+          score = np.mean(means)*nUsers
+          assert type(score) == np.float64
+
+          if printOut:
+               print(f'Score: {score}')
+     else:
+          score = 0
           print(f'Score: {score}')
+
 
      return score, nUsers
