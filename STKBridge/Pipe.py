@@ -1,7 +1,7 @@
 import numpy as np
 
 from STKBridge.Connection import STK
-from STKBridge.eval import evaluator, double_evaluator, winMean_evaluator
+from STKBridge.eval import evaluator, double_evaluator, winMean_evaluator, winMultiple_evaluator
 
 class Pipeline(STK):
 
@@ -70,7 +70,7 @@ class Pipeline(STK):
           # mWin, mGap = evaluator(usersList, AccessDict)
           # solution_old = [mWin, mGap, ConstDict['NumSatsPerPlane']*ConstDict['NumPlanes']]
           # solution_old2 = user_evaluator(usersList, AccessDict, nSats)
-          score, nUsers = winMean_evaluator(usersList, AccessDict, nSats)
+          score, nUsers = winMultiple_evaluator(usersList, AccessDict, nSats)
           if reset: 
                super()._reset()
           return [score, nUsers] 

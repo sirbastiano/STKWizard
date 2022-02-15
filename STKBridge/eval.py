@@ -148,6 +148,9 @@ def winMultiple_evaluator(objectList, AccessDict, nSats, printOut=True):
 
 
      def countUser(durations):
+          """
+          Count the windows (>360)/day
+          """
           counter = 0
           for win in durations:
                if win > 360:
@@ -167,7 +170,7 @@ def winMultiple_evaluator(objectList, AccessDict, nSats, printOut=True):
 
      COUNTER_MEAN = []
      for user in objectList:
-          counter = countUser(user)
+          counter = countUser(AccessDict[user]['durations'])
           COUNTER_MEAN.append(counter)
 
 
