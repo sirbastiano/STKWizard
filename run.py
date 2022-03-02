@@ -27,8 +27,8 @@ def main():
 
 
      Alg = Optimizer(popSize=50, nGenerations = 20, nVar=4, nObj=1, toKeep=5)
-     Alg.run(startWith=14)
-     # Alg.run()
+     # Alg.run(startWith=14)
+     Alg.run()
 
 
 if __name__ == '__main__':

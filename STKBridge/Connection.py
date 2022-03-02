@@ -28,7 +28,7 @@ class STK:
                 root.Isolate()
             except:
                 app = CreateObject('STK{}.Application'.format(version))
-                app.Visible = True 
+                app.Visible = False 
                 app.UserControl= True
                 root = app.Personality2
                 root.Isolate()

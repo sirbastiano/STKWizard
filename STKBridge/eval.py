@@ -72,8 +72,8 @@ def double_evaluator(objectList, AccessDict, nSats, printOut=False):
           for win in durations:
                if win > 360:
                     return True
-               else:
-                    return False
+               
+          return False
 
      def checkDoubleUser(durations):
           goodWin = [d for d in durations if d > 360]
@@ -103,8 +103,8 @@ def winMean_evaluator(objectList, AccessDict, nSats, printOut=True):
           for win in durations:
                if win > 360:
                     return True
-               else:
-                    return False
+               
+          return False
 
      def checkDoubleUser(durations):
           goodWin = [d for d in durations if d > 360]
@@ -143,8 +143,8 @@ def winMultiple_evaluator(objectList, AccessDict, nSats, printOut=True):
           for win in durations:
                if win > 360:
                     return True
-               else:
-                    return False
+               
+          return False
 
 
      def countUser(durations):
