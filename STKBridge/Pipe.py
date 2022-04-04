@@ -32,9 +32,13 @@ class Pipeline(STK):
      #      super()._reset()
      #      return score # [score, nUsers]
 
-     def genSol2(self, X: list, reset=True):
+     def genSol2(self, X: list, reset=True, SELECT = 1, CONE_ANGLE = 50):
+          """
+          parms: SELECT --> 0: WinMean || 1: WinMultiple || 2: Double Users
+                 CONE_ANGLE --> Coninc Angle of Transmitter/Receiver
+          """
           assert(len(X)==4)
-          
+
           a1, a2, RAAN1, RAAN2 = X 
           nSats = 60
           # Inclination:
@@ -53,14 +57,14 @@ class Pipeline(STK):
           SeedDict = {'a':a1, 'e':0,'i':i1, 'w':0, 'RAAN':RAAN1, 'M':10.5}
           ConstDict = {'NumPlanes':NumPlanes, 'NumSatsPerPlane':NumSatxPlane, 'InterPlaneTrueAnomalyIncrement': 0, 'RAANIncrement': RAANincerement, 'ColorByPlane': 'Yes'}
           super().addSatellite(SatName='1seed', params=SeedDict)
-          super().addSensor(SatName='1seed', SenName='Sensor1', params={'coneAngle':50, 'angularResolution':0.1, 'AzEl':[90,-90], 'maxRange':1200})
+          super().addSensor(SatName='1seed', SenName='Sensor1', params={'coneAngle':CONE_ANGLE, 'angularResolution':0.1, 'AzEl':[90,-90], 'maxRange':1200})
           super().WalkerDelta(SatName='1seed', params=ConstDict)
 
           ##################################################### 2nd Walker
           SeedDict = {'a':a2, 'e':0,'i':i2, 'w':0, 'RAAN':RAAN2, 'M':10.5}
           ConstDict = {'NumPlanes':NumPlanes, 'NumSatsPerPlane':NumSatxPlane, 'InterPlaneTrueAnomalyIncrement': 0, 'RAANIncrement': RAANincerement, 'ColorByPlane': 'Yes'}
           super().addSatellite(SatName='2seed', params=SeedDict)
-          super().addSensor(SatName='2seed', SenName='Sensor1', params={'coneAngle':50, 'angularResolution':0.1, 'AzEl':[90,-90], 'maxRange':1200})
+          super().addSensor(SatName='2seed', SenName='Sensor1', params={'coneAngle':CONE_ANGLE, 'angularResolution':0.1, 'AzEl':[90,-90], 'maxRange':1200})
           super().WalkerDelta(SatName='2seed', params=ConstDict)
 
           ##################################################### Constellation + Chain
@@ -70,10 +74,19 @@ class Pipeline(STK):
           # mWin, mGap = evaluator(usersList, AccessDict)
           # solution_old = [mWin, mGap, ConstDict['NumSatsPerPlane']*ConstDict['NumPlanes']]
           # solution_old2 = user_evaluator(usersList, AccessDict, nSats)
-          score, nUsers = winMean_evaluator(usersList, AccessDict, nSats)
+          
+          if SELECT == 0:
+               score, nUsers = winMean_evaluator(usersList, AccessDict, nSats)
+          elif SELECT == 1:
+               score, nUsers = winMultiple_evaluator(usersList, AccessDict, nSats)
+          elif SELECT == 2:
+               score, nUsers = double_evaluator(usersList, AccessDict, nSats)
+          
           if reset: 
                super()._reset()
+
           return [score, nUsers] 
+
 
      def createReport(self, X: list, reset=True):
           assert(len(X)==4)
