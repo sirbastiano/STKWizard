@@ -21,15 +21,15 @@ def main():
                     super().popolate()
                     super().duplicateRemover()
                     # parms: SELECT --> 0: WinMean || 1: WinMultiple || 2: Double Users
-                    super().evaluate(function=lambda x: f.genSol2(x, SELECT = 2, CONE_ANGLE = 50))
+                    super().evaluate(function=lambda x: f.genSol2(x, SELECT = 0, CONE_ANGLE = 40))
                     super().survival(sortBy='Eval')
                     print(f'Gen {self.idxGen} completed.')
                     self.idxGen += 1
 
      
      Alg = Optimizer(popSize=50, nGenerations = 20, nVar=4, nObj=1, toKeep=5)
-     Alg.run(startWith=11)
-     # Alg.run()
+     # Alg.run(startWith=11)
+     Alg.run()
 
 
 if __name__ == '__main__':
