@@ -21,7 +21,7 @@ def main():
                     super().popolate()
                     super().duplicateRemover()
                     # parms: SELECT --> 0: WinMean || 1: WinMultiple || 2: Double Users
-                    super().evaluate(function=lambda x: f.genSol2(x, SELECT = 0, CONE_ANGLE = 40))
+                    super().evaluate(function=lambda x: f.genSol2(x, SELECT = 1, CONE_ANGLE = 30))
                     super().survival(sortBy='Eval')
                     print(f'Gen {self.idxGen} completed.')
                     self.idxGen += 1
