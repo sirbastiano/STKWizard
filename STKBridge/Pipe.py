@@ -99,8 +99,6 @@ class Pipeline(STK):
 
                sat1, sat2, a1, a2, RAAN1, RAAN2 = X 
                nSats = sat1+sat2
-               # Inclination:
-               # cos(i) = - (a/12352)^(7/2)
 
                def computeInc(a):
                     cosi = -(a/12352)**(7/2)
@@ -108,7 +106,7 @@ class Pipeline(STK):
                     return i
 
                i1, i2 = computeInc(a1), computeInc(a2)
-               NumPlanes, NumSatxPlane = 1, 30
+               NumPlanes, NumSatxPlane = 1, sat1
                RAANincerement = 0
 
                ##################################################### 1st Walker
@@ -118,12 +116,14 @@ class Pipeline(STK):
                super().addSensor(SatName='1seed', SenName='Sensor1', params={'coneAngle':CONE_ANGLE, 'angularResolution':0.1, 'AzEl':[90,-90], 'maxRange':1200})
                super().WalkerDelta(SatName='1seed', params=ConstDict)
 
-               ##################################################### 2nd Walker
-               SeedDict = {'a':a2, 'e':0,'i':i2, 'w':0, 'RAAN':RAAN2, 'M':10.5}
-               ConstDict = {'NumPlanes':NumPlanes, 'NumSatsPerPlane':NumSatxPlane, 'InterPlaneTrueAnomalyIncrement': 0, 'RAANIncrement': RAANincerement, 'ColorByPlane': 'Yes'}
-               super().addSatellite(SatName='2seed', params=SeedDict)
-               super().addSensor(SatName='2seed', SenName='Sensor1', params={'coneAngle':CONE_ANGLE, 'angularResolution':0.1, 'AzEl':[90,-90], 'maxRange':1200})
-               super().WalkerDelta(SatName='2seed', params=ConstDict)
+               NumPlanes, NumSatxPlane = 1, sat2
+               if sat2 > 0:
+                    ##################################################### 2nd Walker
+                    SeedDict = {'a':a2, 'e':0,'i':i2, 'w':0, 'RAAN':RAAN2, 'M':10.5}
+                    ConstDict = {'NumPlanes':NumPlanes, 'NumSatsPerPlane':NumSatxPlane, 'InterPlaneTrueAnomalyIncrement': 0, 'RAANIncrement': RAANincerement, 'ColorByPlane': 'Yes'}
+                    super().addSatellite(SatName='2seed', params=SeedDict)
+                    super().addSensor(SatName='2seed', SenName='Sensor1', params={'coneAngle':CONE_ANGLE, 'angularResolution':0.1, 'AzEl':[90,-90], 'maxRange':1200})
+                    super().WalkerDelta(SatName='2seed', params=ConstDict)
 
                ##################################################### Constellation + Chain
                super().CreateConstellationObject(ConstellationName='Sensors')

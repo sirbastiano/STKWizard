@@ -21,7 +21,8 @@ def main():
                     super().popolate()
                     super().duplicateRemover()
                     # parms: SELECT --> 0: WinMean || 1: WinMultiple || 2: Double Users || 3: striano_evaluator
-                    super().evaluate(function=lambda x: f.genSol2(x, SELECT = 3, CONE_ANGLE = 20))
+                    # super().evaluate(function=lambda x: f.genSol2(x, SELECT = 3, CONE_ANGLE = 20))
+                    super().evaluate(function=lambda x: f.genSol3(x, SELECT = 3, CONE_ANGLE = 20))
                     super().survival(sortBy='Eval')
                     print(f'Gen {self.idxGen} completed.')
                     self.idxGen += 1
