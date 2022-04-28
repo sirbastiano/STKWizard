@@ -190,3 +190,38 @@ def winMultiple_evaluator(objectList, AccessDict, nSats, printOut=True):
           print(f'Score: {score}')
 
      return score, nUsers
+
+
+def striano_evaluator(objectList, AccessDict, nSats, printOut=True):
+     """
+     Evaluator that maximizes the total connection window summed * servedUsers
+     t1: threshold finestra minima di contatto utile = 40 secondi
+     t2: threshold durate totali trasmissione
+     """
+     t1, t2 = 40, 12*60
+
+     Satisfied = []
+     Times = []
+     UserTime = {}
+
+
+     users = [x for x in objectList if x[1:5] != "seed"]
+     for user in users:
+          durations = AccessDict[user]['durations']
+          valid_durations = [float(x) for x in durations if float(x) > t1]
+          total_time = sum(valid_durations)
+          if total_time > t2:
+               Satisfied.append(user)     # Users with cumulated time > 12 minutes
+               Times.append(total_time)   # Total times
+               UserTime[user] = total_time
+     
+     nUsers = len(Satisfied)
+     if nUsers > 0:
+          score = nUsers * np.mean(total_time)
+     else:
+          score = 0
+
+     if printOut:
+          print(f'Score: {score}')
+
+     return score, nUsers

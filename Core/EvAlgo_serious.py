@@ -1,11 +1,12 @@
 from re import A
 import numpy as np
 import pandas as pd
+import os
 
 
 class GA:
 
-     def __init__(self, popSize, nGenerations, nVar, nObj, toKeep, nParents):
+     def __init__(self, popSize, nGenerations, nVar, nObj, toKeep, nParents, toRand):
           # Input:
           # popSize: size of the population
           # nGenerations: number of generations
@@ -19,6 +20,7 @@ class GA:
           self.nObj = nObj
           self.toKeep = toKeep
           self.nParents = nParents
+          self.toRand = toRand
           self.cols = ['sat1','sat2','a1','a2','RAAN1','RAAN2']
 
 
@@ -29,8 +31,6 @@ class GA:
                self.evaluate(function=lambda x: sum(x))
                self.survival(nParents=self.nParents, sortBy='Eval')
                self.idxGen += 1
-
-
 
 
      def Sampling(self):
@@ -83,6 +83,11 @@ class GA:
                          individual = self.dfParents.drop(columns = ['Eval','Users']).iloc[idx,:]
                          # individual = self.dfParents.iloc[idx,~self.dfParents.columns.str.contains('Eval') or ~self.dfParents.columns.str.contains('Users')]
                          # TODO: admit to keep the solution.
+                    
+                    elif idx > self.popSize - self.toRand:
+                         v=self.Sampling().astype(int)
+                         individual = pd.DataFrame([v], columns=self.cols)
+
                     else:
                          r = np.random.rand()
                          if r < 0.5:

@@ -1,7 +1,7 @@
 import numpy as np
 
 from STKBridge.Connection import STK
-from STKBridge.eval import evaluator, double_evaluator, winMean_evaluator, winMultiple_evaluator
+from STKBridge.eval import evaluator, double_evaluator, winMean_evaluator, winMultiple_evaluator, striano_evaluator
 
 class Pipeline(STK):
 
@@ -34,7 +34,7 @@ class Pipeline(STK):
 
      def genSol2(self, X: list, reset=True, SELECT = 1, CONE_ANGLE = 50):
           """
-          parms: SELECT --> 0: WinMean || 1: WinMultiple || 2: Double Users
+          parms: SELECT --> 0: WinMean || 1: WinMultiple || 2: Double Users || 3: Striano Mode
                  CONE_ANGLE --> Coninc Angle of Transmitter/Receiver
           """
           assert(len(X)==4)
@@ -81,6 +81,8 @@ class Pipeline(STK):
                score, nUsers = winMultiple_evaluator(usersList, AccessDict, nSats)
           elif SELECT == 2:
                score, nUsers = double_evaluator(usersList, AccessDict, nSats)
+          elif SELECT == 3:
+               score, nUsers = striano_evaluator(usersList, AccessDict, nSats)
           
           if reset: 
                super()._reset()
