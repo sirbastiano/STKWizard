@@ -110,15 +110,16 @@ class Pipeline(STK):
                RAANincerement = 0
 
                ##################################################### 1st Walker
-               SeedDict = {'a':a1, 'e':0,'i':i1, 'w':0, 'RAAN':RAAN1, 'M':10.5}
-               ConstDict = {'NumPlanes':NumPlanes, 'NumSatsPerPlane':NumSatxPlane, 'InterPlaneTrueAnomalyIncrement': 0, 'RAANIncrement': RAANincerement, 'ColorByPlane': 'Yes'}
-               super().addSatellite(SatName='1seed', params=SeedDict)
-               super().addSensor(SatName='1seed', SenName='Sensor1', params={'coneAngle':CONE_ANGLE, 'angularResolution':0.1, 'AzEl':[90,-90], 'maxRange':1200})
-               super().WalkerDelta(SatName='1seed', params=ConstDict)
+               if sat1> 0:
+                    SeedDict = {'a':a1, 'e':0,'i':i1, 'w':0, 'RAAN':RAAN1, 'M':10.5}
+                    ConstDict = {'NumPlanes':NumPlanes, 'NumSatsPerPlane':NumSatxPlane, 'InterPlaneTrueAnomalyIncrement': 0, 'RAANIncrement': RAANincerement, 'ColorByPlane': 'Yes'}
+                    super().addSatellite(SatName='1seed', params=SeedDict)
+                    super().addSensor(SatName='1seed', SenName='Sensor1', params={'coneAngle':CONE_ANGLE, 'angularResolution':0.1, 'AzEl':[90,-90], 'maxRange':1200})
+                    super().WalkerDelta(SatName='1seed', params=ConstDict)
 
+               ##################################################### 2nd Walker
                NumPlanes, NumSatxPlane = 1, sat2
                if sat2 > 0:
-                    ##################################################### 2nd Walker
                     SeedDict = {'a':a2, 'e':0,'i':i2, 'w':0, 'RAAN':RAAN2, 'M':10.5}
                     ConstDict = {'NumPlanes':NumPlanes, 'NumSatsPerPlane':NumSatxPlane, 'InterPlaneTrueAnomalyIncrement': 0, 'RAANIncrement': RAANincerement, 'ColorByPlane': 'Yes'}
                     super().addSatellite(SatName='2seed', params=SeedDict)
