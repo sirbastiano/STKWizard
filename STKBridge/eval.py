@@ -217,7 +217,7 @@ def striano_evaluator(objectList, AccessDict, nSats, printOut=True):
      
      nUsers = len(Satisfied)
      if nUsers > 0:
-          score = nUsers * np.mean(total_time)
+          score = nUsers * np.mean(Times)
      else:
           score = 0
 

@@ -4,6 +4,7 @@ import os
 from comtypes.client import GetActiveObject, CreateObject
 import pandas as pd
 from time import sleep
+from STKBridge.utils import getVarFromTxt
 
 FIRST_RUN_EVER = False
 
@@ -22,13 +23,17 @@ class STK:
         def ConnectToSTK(self, version=11,scenarioPath = cwd+'\\Project',scenarioName='Inserimento'):
         # Connect to STK
             # Launch or connect to STK
+
+            app_visible = getVarFromTxt(varstring='APP_VISIBLE =', txt_path=r'C:\Users\robe.delprete\Documents\PyProject\STKWizard\STK_CONFIG.txt')
+
+
             try:
                 app = GetActiveObject('STK{}.Application'.format(version))
                 root = app.Personality2
                 root.Isolate()
             except:
                 app = CreateObject('STK{}.Application'.format(version))
-                app.Visible = False 
+                app.Visible = app_visible 
                 app.UserControl= True
                 root = app.Personality2
                 root.Isolate()
