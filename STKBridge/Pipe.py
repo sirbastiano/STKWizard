@@ -230,14 +230,14 @@ class Pipeline(STK):
           SeedDict = {'a':a1, 'e':0,'i':i1, 'w':0, 'RAAN':RAAN1, 'M':10.5}
           ConstDict = {'NumPlanes':NumPlanes, 'NumSatsPerPlane':NumSatxPlane, 'InterPlaneTrueAnomalyIncrement': 0, 'RAANIncrement': RAANincerement, 'ColorByPlane': 'Yes'}
           super().addSatellite(SatName='1seed', params=SeedDict)
-          super().addSensor(SatName='1seed', SenName='Sensor1', params={'coneAngle':50, 'angularResolution':0.1, 'AzEl':[90,-90], 'maxRange':1200})
+          super().addSensor(SatName='1seed', SenName='Sensor1', params={'coneAngle':60, 'angularResolution':0.1, 'AzEl':[90,-90], 'maxRange':1200})
           super().WalkerDelta(SatName='1seed', params=ConstDict)
 
           ##################################################### 2nd Walker
           SeedDict = {'a':a2, 'e':0,'i':i2, 'w':0, 'RAAN':RAAN2, 'M':10.5}
           ConstDict = {'NumPlanes':NumPlanes, 'NumSatsPerPlane':NumSatxPlane, 'InterPlaneTrueAnomalyIncrement': 0, 'RAANIncrement': RAANincerement, 'ColorByPlane': 'Yes'}
           super().addSatellite(SatName='2seed', params=SeedDict)
-          super().addSensor(SatName='2seed', SenName='Sensor1', params={'coneAngle':50, 'angularResolution':0.1, 'AzEl':[90,-90], 'maxRange':1200})
+          super().addSensor(SatName='2seed', SenName='Sensor1', params={'coneAngle':60, 'angularResolution':0.1, 'AzEl':[90,-90], 'maxRange':1200})
           super().WalkerDelta(SatName='2seed', params=ConstDict)
 
           ##################################################### Constellation + Chain
