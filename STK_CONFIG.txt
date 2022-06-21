@@ -1,2 +1,2 @@
-APP_VISIBLE = True
+APP_VISIBLE = False
 
